@@ -28,7 +28,7 @@ public class RoverSystemParser {
         return new Rover(coordinate, heading);
     }
 
-    public RoverSystem parse() {
+    public RoverSystem parse() throws NullPointerException{
         RoverSystem roverSystem = new RoverSystem();
         Rover rover = parseRover();
         roverSystem.addRover(rover);
@@ -37,7 +37,7 @@ public class RoverSystemParser {
         return roverSystem;
     }
 
-    private RoverCommands parseRoverCommands() {
+    private RoverCommands parseRoverCommands() throws NullPointerException{
         RoverCommands roverCommands = new RoverCommands();
         String instructions = scanner.consume();
         for (int i = 0; i < instructions.length(); i++) {
