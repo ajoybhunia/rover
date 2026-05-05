@@ -9,7 +9,9 @@ import com.tw.step.rover.roversystem.RoverSystemParser;
 import com.tw.step.rover.roversystem.RoverSystemScanner;
 
 public class App {
-    static void main() throws NullPointerException{
+    static void main() {
+        try {
+
         String text = """
 1 5 N
 LFFRFLFFFR
@@ -23,5 +25,9 @@ LFFRFLFFFR
         RoverSystem system = roverSystemParser.parse();
         system.execute();
         System.out.println(system);
+        } catch (Exception e) {
+            System.err.println("Failed: "+e.getMessage());
+            e.printStackTrace();
+        }
     }
 }
