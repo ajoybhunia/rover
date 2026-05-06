@@ -23,21 +23,31 @@ public class RoverSystemParser {
     }
 
     private Rover parseRover() {
+        String id = scanner.consume();
         Coordinate coordinate = scanner.scanCoordinate();
         Direction heading = scanner.scanDirection();
-        return new Rover(coordinate, heading);
+        return new Rover(id, coordinate, heading);
     }
 
-    public RoverSystem parse() throws NullPointerException{
+    public RoverSystem parse() throws IllegalArgumentException {
         RoverSystem roverSystem = new RoverSystem();
-        Rover rover = parseRover();
-        roverSystem.addRover(rover);
-        RoverCommands roverCommands = parseRoverCommands();
-        roverSystem.addCommands(roverCommands);
+
+        while (!(scanner.peek().contains(":"))) {
+            String id = scanner.peek();
+            Rover rover = parseRover();
+            roverSystem.addRover(id, rover);
+        }
+
+        while (scanner.peek() != null) {
+            String id = scanner.consume().replace(":", "");
+            RoverCommands roverCommands = parseRoverCommands();
+            roverSystem.addCommands(id, roverCommands);
+        }
+
         return roverSystem;
     }
 
-    private RoverCommands parseRoverCommands() throws NullPointerException{
+    private RoverCommands parseRoverCommands() throws IllegalArgumentException {
         RoverCommands roverCommands = new RoverCommands();
         String instructions = scanner.consume();
         for (int i = 0; i < instructions.length(); i++) {

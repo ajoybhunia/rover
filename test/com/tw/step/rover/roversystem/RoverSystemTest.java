@@ -15,14 +15,14 @@ class RoverSystemTest {
     @Test
     void shouldExecuteCommandsForAddedRover() {
         RoverSystem roverSystem = new RoverSystem();
-        Rover rover = new Rover(new Coordinate(0, 0), Direction.N);
+        Rover rover = new Rover("R1", new Coordinate(0, 0), Direction.N);
         RoverCommands commands = new RoverCommands();
         commands.add(new MoveCommand(Navigator.create(), new InfinitePlateau()));
 
-        roverSystem.addRover(rover);
-        roverSystem.addCommands(commands);
+        roverSystem.addRover("R1", rover);
+        roverSystem.addCommands("R1", commands);
         roverSystem.execute();
 
-        assertEquals("0 1 N", roverSystem.toString());
+        assertEquals("R1 -> 0 1 N", roverSystem.toString());
     }
 }

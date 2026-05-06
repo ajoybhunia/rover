@@ -4,8 +4,7 @@ import com.tw.step.rover.boundary.InfinitePlateau;
 import com.tw.step.rover.position.Navigator;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CommandCreatorTest {
     @Test
@@ -21,6 +20,6 @@ class CommandCreatorTest {
 
     @Test
     void shouldReturnNullForUnknownInstruction() {
-        assertNull(new CommandCreator().create('X', Navigator.create(), new InfinitePlateau()));
+        assertThrows(IllegalArgumentException.class,() -> new CommandCreator().create('X', Navigator.create(), new InfinitePlateau()));
     }
 }

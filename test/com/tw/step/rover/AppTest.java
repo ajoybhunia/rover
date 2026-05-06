@@ -20,6 +20,6 @@ class AppTest {
             System.setOut(originalOut);
         }
 
-        assertEquals("-1 5 N" + System.lineSeparator(), output.toString());
+        assertEquals("R1 -> -1 5 N" + System.lineSeparator(), output.toString());
     }
 }
